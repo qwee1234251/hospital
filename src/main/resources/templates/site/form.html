@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>站點表單</title>
+</head>
+<body>
+    <h2>新增/編輯站點</h2>
+
+    <form th:action="@{/sites}" method="post" th:object="${site}">
+        <div>
+            <button type="submit">儲存</button>
+            <a th:href="@{/sites}"><button type="button">返回</button></a>
+        </div>
+
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label>名稱：</label>
+            <input type="text" th:field="*{name}" />
+        </div>
+    </form>
+
+    <div th:if="${nurseSites}">
+        <h2>已分配的護士</h2>
+        <table border="1">
+            <tr>
+                <th>員工編號</th>
+                <th>姓名</th>
+                <th>加入時間</th>
+            </tr>
+            <tr th:each="ns : ${nurseSites}">
+                <td th:text="${ns.nurse.employeeId}">ID</td>
+                <td th:text="${ns.nurse.name}">姓名</td>
+                <td th:text="${#temporals.format(ns.joinTime, 'yyyy-MM-dd HH:mm')}">加入時間</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

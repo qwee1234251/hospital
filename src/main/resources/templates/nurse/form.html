@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編輯護士</title>
+    <meta charset="UTF-8">
+    <style>
+        .flex-row { display: flex; gap: 20px; align-items: center; }
+        .box { width: 150px; height: 150px; overflow-y: auto; border: 1px solid #333; padding: 10px; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .btn-move { cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<h2>編輯護士</h2>
+
+<form th:action="@{/nurses}" th:object="${nurse}" method="post">
+    <div>
+        <button type="submit">儲存</button>
+        <a th:href="@{/nurses}"><button type="button">返回</button></a>
+    </div>
+
+    <div>
+        <label>員工編號</label>
+        <input type="text" th:field="*{employeeId}" th:readonly="${nurse.employeeId != null}" required/>
+    </div>
+
+    <div>
+        <label>護士姓名</label>
+        <input type="text" th:field="*{name}" required/>
+    </div>
+
+    <div>
+        <label>分配站點</label>
+        <div style="display: flex; align-items: flex-start; gap: 15px; margin-top: 10px;">
+            
+            <!-- 左邊：已加入 -->
+            <div style="display: flex; flex-direction: column;">
+                <label style="margin-bottom: 5px; font-weight: bold;">已加入</label>
+                <select id="joinedSites" name="joinedSiteIds" multiple size="8" 
+                        style="width: 200px; height: 180px; border: 2px solid #ccc; padding: 5px; font-size: 14px;">
+                    <option th:each="site : ${joinedSites}" th:value="${site.id}" th:text="${site.name}"></option>
+                </select>
+            </div>
+
+            <!-- 中間按鈕 -->
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 15px; margin-top: 30px;">
+                <button type="button" onclick="moveOption('availableSites', 'joinedSites')" 
+                        style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                    ← 加入
+                </button>
+                <button type="button" onclick="moveOption('joinedSites', 'availableSites')" 
+                        style="padding: 8px 12px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+                    移除 →
+                </button>
+            </div>
+
+            <!-- 右邊：未加入 -->
+            <div style="display: flex; flex-direction: column;">
+                <label style="margin-bottom: 5px; font-weight: bold;">未加入</label>
+                <select id="availableSites" multiple size="8" 
+                        style="width: 200px; height: 180px; border: 2px solid #ccc; padding: 5px; font-size: 14px;">
+                    <option th:each="site : ${availableSites}" th:value="${site.id}" th:text="${site.name}"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    function moveOption(fromId, toId) {
+        const from = document.getElementById(fromId);
+        const to = document.getElementById(toId);
+        Array.from(from.selectedOptions).forEach(option => {
+            from.removeChild(option);
+            to.appendChild(option);
+        });
+    }
+
+    // 修正：提交時選中所有已加入的站點
+    document.querySelector("form").addEventListener("submit", function(e) {
+        const joinedSites = document.getElementById("joinedSites");
+        // 選中所有已加入的站點選項，確保它們會被提交
+        Array.from(joinedSites.options).forEach(option => {
+            option.selected = true;
+        });
+    });
+</script>
+
+</body>
+</html>

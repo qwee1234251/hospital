@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>站點列表</title>
+</head>
+<body>
+    <h1>站點列表</h1>
+    <a th:href="@{/}">回首頁</a> |
+    <a th:href="@{/sites/new}">新增站點</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名稱</th>
+                <th>最後更新</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="site : ${sites}">
+                <td th:text="${site.id}">ID</td>
+                <td th:text="${site.name}">名稱</td>
+				<td th:text="${#temporals.format(site.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+                <td>
+                    <a th:href="@{'/sites/edit/' + ${site.id}}">編輯</a> |
+                    <a th:href="@{'/sites/delete/' + ${site.id}}">刪除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
