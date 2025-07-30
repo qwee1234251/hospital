@@ -178,24 +178,6 @@ src/
 - 修改實體類別後，重新啟動應用程式
 - Hibernate 會自動更新資料表結構（因為設定了 `ddl-auto=update`）
 
-## 貢獻指南
-
-1. Fork 本專案
-2. 創建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交變更 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 開啟 Pull Request
-
-## 授權條款
-
-本專案採用 MIT 授權條款 - 查看 [LICENSE](LICENSE) 文件了解詳情。
-
-## 聯絡資訊
-
-- 專案維護者：[你的名字]
-- Email：[你的email]
-- 專案連結：[GitHub repository URL]
-
 ## 更新日誌
 
 ### v1.0.0 (2025-07-29)
