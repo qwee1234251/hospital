@@ -1,17 +1,17 @@
 # 醫院管理系統 (Hospital Management System)
 
 
-## 功能特色
+## 功能介紹
 
 - **護士管理**：新增、編輯、刪除護士資訊
 - **站點管理**：管理醫院內各個工作站點
-- **關聯管理**：靈活的護士與站點多對多關係分配
+- **關聯管理**：護士與站點多對多關係分配
 - **Web介面**：直觀的網頁操作介面
 - **時間追蹤**：自動記錄更新時間和加入時間
 
 ## 技術架構
 
-- **後端框架**：Spring Boot 3.x
+- **後端框架**：Spring Boot 3.5.3
 - **資料庫**：MySQL 8.0+
 - **ORM框架**：Spring Data JPA / Hibernate
 - **模板引擎**：Thymeleaf
@@ -24,13 +24,9 @@
 - MySQL 8.0 或更高版本
 - Maven 3.6+
 
-### 硬體需求
-- 記憶體：最少 512MB RAM
-- 硬碟：最少 100MB 可用空間
-
 ## 安裝說明
 
-### 1. 克隆專案
+### 1. 複製專案
 ```bash
 git clone <your-repository-url>
 cd hospital-management-system
@@ -94,26 +90,26 @@ mvn spring-boot:run
 ### 主要資料表
 
 #### nurse（護士表）
-| 欄位 | 類型 | 說明 |
-|------|------|------|
-| employee_id | VARCHAR | 員工編號（主鍵） |
-| name | VARCHAR | 護士姓名 |
-| updated_at | TIMESTAMP | 最後更新時間 |
+|     欄位     |    類型   |       說明      |
+|-------------|-----------|-----------------|
+| employee_id | VARCHAR   | 員工編號（主鍵） |
+| name        | VARCHAR   | 護士姓名         |
+| updated_at  | TIMESTAMP | 最後更新時間     |
 
 #### site（站點表）
-| 欄位 | 類型 | 說明 |
-|------|------|------|
-| id | BIGINT | 站點ID（主鍵，自增） |
-| name | VARCHAR | 站點名稱 |
-| updated_at | TIMESTAMP | 最後更新時間 |
+|    欄位    |    類型    |        說明         |
+|------------|-----------|---------------------|
+| id         | BIGINT    | 站點ID（主鍵，自增）  |
+| name       | VARCHAR   | 站點名稱             |
+| updated_at | TIMESTAMP | 最後更新時間         |
 
 #### nurse_site（關聯表）
-| 欄位 | 類型 | 說明 |
-|------|------|------|
-| id | BIGINT | 關聯ID（主鍵，自增） |
-| nurse_id | VARCHAR | 護士ID（外鍵） |
-| site_id | BIGINT | 站點ID（外鍵） |
-| join_time | TIMESTAMP | 加入時間 |
+|    欄位    |   類型    |        說明        |
+|-----------|-----------|--------------------|
+| id        | BIGINT    | 關聯ID（主鍵，自增） |
+| nurse_id  | VARCHAR   | 護士ID（外鍵）      |
+| site_id   | BIGINT    | 站點ID（外鍵）      |
+| join_time | TIMESTAMP | 加入時間            |
 
 ## 專案結構
 
@@ -142,10 +138,10 @@ src/
 │       └── templates/                       # Thymeleaf 模板
 │           ├── index.html                   # 首頁
 │           ├── nurse/
-│           │   ├── form.html               # 護士表單
+│           │   ├── form.html               # 護士編輯表單
 │           │   └── list.html               # 護士列表
 │           └── site/
-│               ├── form.html               # 站點表單
+│               ├── form.html               # 站點編輯表單
 │               └── list.html               # 站點列表
 ```
 
@@ -154,7 +150,7 @@ src/
 ### Q: 啟動時出現資料庫連線錯誤
 **A:** 檢查以下項目：
 - MySQL 服務是否正在運行
-- 資料庫連線資訊是否正確
+- 檢查`src/main/resources/application.properties`資料庫連線資訊是否正確
 - 使用者是否有足夠權限
 
 ### Q: 頁面顯示異常
