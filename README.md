@@ -101,7 +101,7 @@ mvn spring-boot:run
 |------------|-----------|---------------------|
 | id         | BIGINT    | 站點ID（主鍵，自增）  |
 | name       | VARCHAR   | 站點名稱             |
-| updated_at | TIMESTAMP | 最後更新時間         |
+| updated_at | TIMESTAMP | 最後更新時間          |
 
 #### nurse_site（關聯表）
 |    欄位    |   類型    |        說明        |
